@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.lid.intellij.translateme</id>
     <name>TranslateMe</name>
-    <version>1.0.0.8</version>
+    <version>1.0.0.9</version>
     <vendor email="vladimir.vs.ivanov@gmail.com" url="https://github.com/vlivanov">vlivanov's GitHub</vendor>
 
     <description><![CDATA[
@@ -14,6 +14,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
+            1.0.0.9 Add reverse translate actions and multi-caret support
             1.0.0.8 Add option for split words on underscores, Fix auto-detect language
             1.0.0.7 Fix dependency on Java IDE only classes
             1.0.0.6 Settings are saved across IDE restart<br>
@@ -53,11 +54,23 @@
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt Y"/>
         </action>
+        <action id="com.lid.intellij.translateme.actions.ReverseTranslateAction" class="com.lid.intellij.translateme.actions.ReverseTranslateAction"
+                text="Reverse Translate action"
+                description="Click here to try translate a selected word with Yandex translator, using reverse language selection">
+            <add-to-group group-id="EditMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift alt Y"/>
+        </action>
         <action id="com.lid.intellij.translateme.actions.TranslateAndReplaceAction" class="com.lid.intellij.translateme.actions.TranslateAndReplaceAction"
                 text="Translate and Replace action"
                 description="Click here to replace a selected word with Yandex translatation">
             <add-to-group group-id="EditMenu" anchor="last"/>
             <keyboard-shortcut keymap="$default" first-keystroke="alt G"/>
+        </action>
+        <action id="com.lid.intellij.translateme.actions.ReverseTranslateAndReplaceAction" class="com.lid.intellij.translateme.actions.ReverseTranslateAndReplaceAction"
+                text="Reverse Translate and Replace action"
+                description="Click here to replace a selected word with Yandex translatation, using reverse language selection">
+            <add-to-group group-id="EditMenu" anchor="last"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift alt G"/>
         </action>
     </actions>
 
