@@ -14,7 +14,7 @@
     ]]></description>
 
     <change-notes><![CDATA[
-            1.0.0.9 Add reverse translate actions and multi-caret support
+            1.0.0.9 Add reverse translate actions, auto-word select and multi-caret support
             1.0.0.8 Add option for split words on underscores, Fix auto-detect language
             1.0.0.7 Fix dependency on Java IDE only classes
             1.0.0.6 Settings are saved across IDE restart<br>

@@ -5,6 +5,7 @@ public class ConfigurationState {
 	private String langFrom = "en";
 	private String langTo = "ru";
 	private boolean autoDetect = false;
+	private boolean autoSelect = true;
 	private boolean translationTooltip = false;
 	private boolean splitCamelCase = false;
 	private boolean splitUnderscores = false;
@@ -17,6 +18,14 @@ public class ConfigurationState {
 		return langTo;
 	}
 
+	public String[] getLangPair(boolean isReversed) {
+		ConfigurationState state = PersistingService.getInstance().getState();
+
+		String from = langFrom;
+		String to = langTo;
+		return isReversed ? new String[]{to, from} : new String[]{from, to};
+	}
+
 	// do not remove; necessary for settings serialization
 	public void setLangFrom(String langFrom) {
 		this.langFrom = langFrom;
@@ -25,6 +34,14 @@ public class ConfigurationState {
 	// do not remove; necessary for settings serialization
 	public void setLangTo(String langTo) {
 		this.langTo = langTo;
+	}
+
+	public boolean isAutoSelect() {
+		return autoSelect;
+	}
+
+	public void setAutoSelect(boolean autoSelect) {
+		this.autoSelect = autoSelect;
 	}
 
 	public boolean isAutoDetect() {

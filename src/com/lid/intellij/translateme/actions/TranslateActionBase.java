@@ -35,6 +35,11 @@ abstract class TranslateActionBase extends EditorAction {
 		return state.isAutoDetect();
 	}
 
+	public static boolean isAutoSelect() {
+		ConfigurationState state = PersistingService.getInstance().getState();
+		return state.isAutoSelect();
+	}
+
 	public static boolean isTranslationTooltip() {
 		ConfigurationState state = PersistingService.getInstance().getState();
 		return state.isTranslationTooltip();
@@ -42,10 +47,7 @@ abstract class TranslateActionBase extends EditorAction {
 
 	public static String[] getLangPair(boolean isReversed) {
 		ConfigurationState state = PersistingService.getInstance().getState();
-
-		String from = state.getLangFrom();
-		String to = state.getLangTo();
-		return isReversed ? new String[]{to, from} : new String[]{from, to};
+		return state.getLangPair(isReversed);
 	}
 
 	protected static class PopupActionHandler implements ActionHandler {

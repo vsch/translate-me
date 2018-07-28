@@ -21,13 +21,14 @@ public class TranslationConfigurationForm {
 
 	private LangsResponse mLangsResponse;
 	private final Checkbox autoDetect;
+	private final Checkbox autoSelect;
 	private final Checkbox translationTooltip;
 	private final Checkbox splitCamelCase;
 	private final Checkbox splitUnderscores;
 
 	public TranslationConfigurationForm() {
 		rootComponent = new JPanel();
-		rootComponent.setPreferredSize(new Dimension(200,200));
+		rootComponent.setPreferredSize(new Dimension(200, 200));
 		//rootComponent.setBackground(Color.blue);
 		rootComponent.setLayout(new GridBagLayout());
 
@@ -43,33 +44,42 @@ public class TranslationConfigurationForm {
 		GridBagConstraints c2 = new GridBagConstraints();
 		c.anchor = GridBagConstraints.EAST;
 		c2.fill = GridBagConstraints.EAST;
-		c2.gridx= 0;
+		c2.gridx = 0;
 		c2.gridy = 1;
+		autoSelect = new Checkbox("Auto-select word");
+		initCheckbox(autoSelect);
+		rootComponent.add(autoSelect, c2);
+
+		GridBagConstraints c21 = new GridBagConstraints();
+		c.anchor = GridBagConstraints.EAST;
+		c21.fill = GridBagConstraints.EAST;
+		c21.gridx = 0;
+		c21.gridy = 2;
 		autoDetect = new Checkbox("Auto-detect");
 		initCheckbox(autoDetect);
-		rootComponent.add(autoDetect, c2);
+		rootComponent.add(autoDetect, c21);
 
 		GridBagConstraints c3 = new GridBagConstraints();
 		c.anchor = GridBagConstraints.EAST;
 		c3.fill = GridBagConstraints.EAST;
-		c3.gridx= 0;
-		c3.gridy = 2;
+		c3.gridx = 0;
+		c3.gridy = 3;
 		translationTooltip = new Checkbox("Use tooltip to display translations");
 		rootComponent.add(translationTooltip, c3);
 
 		GridBagConstraints c5 = new GridBagConstraints();
 		c.anchor = GridBagConstraints.EAST;
 		c5.fill = GridBagConstraints.EAST;
-		c5.gridx= 0;
-		c5.gridy = 3;
+		c5.gridx = 0;
+		c5.gridy = 4;
 		splitUnderscores = new Checkbox("Split words on underscores");
 
 		rootComponent.add(splitUnderscores, c5);
 		GridBagConstraints c4 = new GridBagConstraints();
 		c.anchor = GridBagConstraints.EAST;
 		c4.fill = GridBagConstraints.EAST;
-		c4.gridx= 0;
-		c4.gridy = 4;
+		c4.gridx = 0;
+		c4.gridy = 5;
 		splitCamelCase = new Checkbox("Split camel case words");
 		rootComponent.add(splitCamelCase, c4);
 	}
@@ -138,6 +148,7 @@ public class TranslationConfigurationForm {
 		}
 
 		data.setAutoDetect(autoDetect.getState());
+		data.setAutoSelect(autoSelect.getState());
 		data.setTranslationTooltip(translationTooltip.getState());
 		data.setSplitCamelCase(splitCamelCase.getState());
 		data.setSplitUnderscores(splitUnderscores.getState());
@@ -148,6 +159,7 @@ public class TranslationConfigurationForm {
 		comboBoxFrom.setSelectedItem(data.getLangFrom());
 		comboBoxTo.setSelectedItem(data.getLangTo());
 		autoDetect.setState(data.isAutoDetect());
+		autoSelect.setState(data.isAutoSelect());
 		translationTooltip.setState(data.isTranslationTooltip());
 		splitCamelCase.setState(data.isSplitCamelCase());
 		splitUnderscores.setState(data.isSplitUnderscores());
@@ -158,16 +170,15 @@ public class TranslationConfigurationForm {
 		Object selectedFrom = comboBoxFrom.getSelectedItem();
 		Object selectedTo = comboBoxTo.getSelectedItem();
 
-		boolean autoChecked = autoDetect.getState();
-
 		final boolean fromChanged = selectedFrom != null && !selectedFrom.equals(data.getLangFrom());
 		final boolean toChanged = selectedTo != null && !selectedTo.equals(data.getLangTo());
-		final boolean detectChanged = autoChecked != data.isAutoDetect();
+		final boolean detectChanged = autoDetect.getState() != data.isAutoDetect();
+		final boolean selectChanged = autoSelect.getState() != data.isAutoSelect();
 		final boolean balloonChanged = translationTooltip.getState() != data.isTranslationTooltip();
 		final boolean camelCaseChanged = splitCamelCase.getState() != data.isSplitCamelCase();
 		final boolean splitUnderscoresChanged = splitUnderscores.getState() != data.isSplitUnderscores();
 
-		return fromChanged || toChanged || detectChanged || balloonChanged || camelCaseChanged || splitUnderscoresChanged;
+		return fromChanged || toChanged || detectChanged || selectChanged || balloonChanged || camelCaseChanged || splitUnderscoresChanged;
 	}
 
 }

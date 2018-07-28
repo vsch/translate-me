@@ -18,7 +18,7 @@ public class PersistingService implements PersistentStateComponent<Configuration
 		return ServiceManager.getService(PersistingService.class);
 	}
 
-	@Nullable
+	@NotNull
 	@Override
 	public ConfigurationState getState() {
 		return state;
